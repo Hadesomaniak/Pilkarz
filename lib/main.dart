@@ -8,6 +8,7 @@ void main(){
   );
 }
 
+
 class profil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,69 +48,86 @@ class profil extends StatelessWidget {
                     "Moja ocena:",
                     ),
                   ),
-                  Icon(Icons.star),
-                  Icon(Icons.star_border),
-                  Icon(Icons.star_border),
+            StarsRow(1),
                 ],
+
               ),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              padding: EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Icon(Icons.child_care),
-                  Expanded(child: Text(
-                    "06.11.1989",
-                    textAlign: TextAlign.center,
-                  ),
-                  ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              padding: EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Icon(Icons.star_border_rounded),
-                  Expanded(child: Text(
-                    "Toronto FC",
-                    textAlign: TextAlign.center,
-                  ),
-                  ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              padding: EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Icon(Icons.arrow_upward),
-                  Expanded(child: Text(
-                    "1,85 m",
-                    textAlign: TextAlign.center,
-                  ),
-                  ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
+            white_box(Icons.child_care,"06.11.1989"),
+            white_box(Icons.star_border_rounded, "Toronto FC"),
+            white_box(Icons.arrow_upward,"1,85 m"),
           ],
         )
       )
     );
+
+  }
+  }
+class StarsRow extends StatelessWidget {
+  final int rating;
+
+  const StarsRow(this.rating, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> stars = [];
+    for(int i = 0; i < 3; i++)
+    {
+      if( i < rating){
+        stars.add(Icon(Icons.star));
+      }
+      else
+      {
+stars.add(Icon(Icons.star_border));
+}
+
+}
+return Row(
+children:
+stars
+);
+}
+}
+
+
+class white_box extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  const white_box(this.icon,this.text, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Widget> box = [];
+     return Container(
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        padding: EdgeInsets.all(8),
+        child: Row(
+          children: [
+            Icon(icon),
+            Expanded(child: Text(
+              (text),
+              textAlign: TextAlign.center,
+            ),
+            ),
+          ],
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+      );
+    box.add(Icon(icon));
+    box.add(Text(text));
+    return Container(
+      child: Row(
+        children: box,
+      ),
+    );
   }
 }
+
+
